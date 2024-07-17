@@ -479,7 +479,6 @@ function init() {
 		case 'index.html':
 			displaySlider();
 			displayPopularMovies();
-			console.log('home');
 			break;
 		case '/shows.html':
 			displayPopularShows();
