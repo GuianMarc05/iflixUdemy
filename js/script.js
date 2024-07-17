@@ -52,8 +52,6 @@ async function displayPopularMovies() {
 async function displayPopularShows() {
 	const { results } = await fetchAPIData('tv/popular');
 
-	console.log(results);
-
 	results.forEach((show) => {
 		const div = document.createElement('div');
 		div.classList.add('card');
@@ -409,16 +407,24 @@ async function fetchAPIData(endpoint) {
 	const API_URL = global.api.apiUrl;
 
 	showSpinner();
+	try {
+		const response = await fetch(
+			`${API_URL}${endpoint}?api_key=${API_KEY}&language=en-US`
+		);
 
-	const response = await fetch(
-		`${API_URL}${endpoint}?api_key=${API_KEY}&language=en-US`
-	);
+		if (!response.ok) {
+			throw new Error(`HTTP error! status ${response.status}`);
+		}
 
-	const data = await response.json();
+		const data = await response.json();
 
-	hideSpinner();
+		hideSpinner();
 
-	return data;
+		return data;
+	} catch {
+		console.error('Error fetching data: ', error);
+		return { results: [] };
+	}
 }
 
 // Make request to search
