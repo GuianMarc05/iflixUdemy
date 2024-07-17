@@ -17,6 +17,8 @@ const global = {
 async function displayPopularMovies() {
 	const { results } = await fetchAPIData('movie/popular');
 
+	console.log(results);
+
 	results.forEach((movie) => {
 		const div = document.createElement('div');
 		div.classList.add('card');
@@ -51,6 +53,8 @@ async function displayPopularMovies() {
 // display 20 most popular tv show
 async function displayPopularShows() {
 	const { results } = await fetchAPIData('tv/popular');
+
+	console.log(results);
 
 	results.forEach((show) => {
 		const div = document.createElement('div');
